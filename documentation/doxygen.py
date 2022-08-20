@@ -2198,6 +2198,9 @@ def parse_var(state: State, element: ET.Element):
         var.is_constexpr = True
     else:
         var.is_constexpr = False
+    bitfield = element.find('bitfield')
+    if bitfield is not None:
+        var.type += ' :' + bitfield.text
     var.is_static = element.attrib['static'] == 'yes'
     var.is_protected = element.attrib['prot'] == 'protected'
     var.is_private = element.attrib['prot'] == 'private'
